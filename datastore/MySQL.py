@@ -19,7 +19,15 @@ class MySQL:
         self.dbh.commit()
         self._close()
 
-    def export_alldata(self):
+    def insert_devicelist(self,deviceId,address):
+        self._open()
+        cursor=self.dbh.cursor()
+        cursor.execute('INSERT INTO devicelist VALUES (%s,%s)',(deviceId,address))
+        cursor.close()
+        self.dbh.commit()
+        self._close()
+
+    def export_sigfoxdata_all(self):
         self._open()
         cursor=self.dbh.cursor()
         cursor.execute('SELECT * FROM measurement')
@@ -28,10 +36,19 @@ class MySQL:
         self._close()
         return data
 
-    def export_id_data(self,deviceId):
+    def export_sigfoxdata_where_id(self,deviceId):
         self._open()
         cursor=self.dbh.cursor()
-        cursor.execute('SELECT * FROM measurement WHERE deviceId %s',deviceId)
+        cursor.execute('SELECT * FROM measurement WHERE deviceId = %s',(deviceId,))
+        data=cursor.fetchall()
+        cursor.close()
+        self._close()
+        return data
+
+    def export_devicelist_all(self):
+        self._open()
+        cursor=self.dbh.cursor()
+        cursor.execute('SELECT * FROM devicelist')
         data=cursor.fetchall()
         cursor.close()
         self._close()

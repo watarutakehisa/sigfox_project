@@ -9,13 +9,13 @@
             <p>{{props.msg}}</p>
             <table>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
+                    <th>DEVICE ID</th>
+                    <th>ADDRESS</th>
                 </tr>
-                {% for deviceId in list %}
+                {% for device in list %}
                 <tr>
-                    <td><a href="./deviceIds/{{deviceId[0]}}">{{deviceId[0]}}</a></td>
-                    <td>{{deviceId[1]}}</td>
+                    <td><a href="./{{device[0]}}">{{device[0]}}</a></td>
+                    <td>{{device[1]}}</td>
                 </tr>
                 {% endfor %}
             </table>

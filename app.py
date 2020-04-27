@@ -14,26 +14,10 @@ dns={
 db=MySQL(**dns)
 
 app = Flask(__name__)
-
-@app.route('/deviceIds')
-def deviceId_list():
-    props = {'title': 'DeviceId List', 'msg': 'DeviceId List'}
-    list = db.export_alldata()
-    html = render_template('deviceId_list.html', props=props, list=list)
-    return html
-
 @app.route('/test')
 def test():
-    sigfoxdata = db.export_alldata()
+    sigfoxdata = db.export_sigfoxdata_all()
     html = render_template('index.html',sigfoxdata=sigfoxdata)
-    return html
-
-@app.route('/deviceId/<int:deviceId>')
-def user(deviceId):
-    props = {'title': 'User Information', 'msg': 'User Information'}
-    stmt = 'SELECT * FROM measurement WHERE deviceId = ?'
-    user = db.query(stmt, deviceId, prepared=True)
-    html = render_template('user.html', props=props,user=user[0])
     return html
 
 @app.route('/receive', methods=['POST'])
@@ -43,11 +27,18 @@ def receive_data():
     db.insert_sigfoxdata(**data)
     return data['distance']
 
-@app.route('/hello')
-def hello():
-    stmt = 'SELECT * FROM measurement'
-    deviceIds = db.query(stmt)
-    return deviceIds[0][0]
+@app.route('/devicelist')
+def devicelist():
+    props = {'title': 'Device List', 'msg': 'aaa'}
+    list = db.export_devicelist_all()
+    html = render_template('devicelist.html',props=props,list=list)
+    return html
+
+@app.route('/<string:id>')
+def sigfoxdata(id):
+    sigfoxdata = db.export_sigfoxdata_where_id(id)
+    html = render_template('index.html',sigfoxdata=sigfoxdata)
+    return html
 
 if __name__ == '__main__':
     app.run(debug=True)
