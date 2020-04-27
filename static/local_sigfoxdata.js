@@ -1,9 +1,8 @@
-let date = [],
+var date = [],
     temperature = [],
     humidity = [],
     pressure = [],
-    waterlevel = [],//add
-    compressed, tmp;
+    waterlevel = [];
 
 function drawChart(){
     setData(obj).then(function(){
@@ -13,33 +12,15 @@ function drawChart(){
 
 async function setData(obj){
     for(let i=0; i<obj.length; i++){
-        // date.push(new Date(obj.data[i].time*1000));  // set as Date object
-        date.push(new Date(obj[i][1]));  // if use API v2
-        //compressed = obj.data[i].data;
-
+        date[i] = Date(obj[i][1]);  // if use API v2
         // TEMPERATURE
-        //tmp = "0x" + compressed.substring(0, 8);
-        temperature.push({
-            t: date[i],  // either x: or t:
-            y: obj[i][2]
-        });
+        temperature[i] = {t: date[i], y: obj[i][2]};
         // HUMIDITY
-        //tmp = "0x" + compressed.substring(8, 16);
-        humidity.push({
-            t: date[i],
-            y: obj[i][3]
-        });
+        humidity[i] = {t: date[i], y: obj[i][3]};
         // PRESSURE
-        pressure.push({
-            t: date[i],
-            y: obj[i][4]
-        });
-        //add
+        pressure[i] = {t: date[i], y: obj[i][4]};
         // WATERLEVEL
-        waterlevel.push({
-            t: date[i],
-            y: obj[i][5]
-        });
+        waterlevel[i] = {t: date[i],y: obj[i][5]};
     }
     return 0;
 }
@@ -51,7 +32,6 @@ function plotCharts(){
     window.hChart = new Chart(hct, hconfig);
     var pct = document.getElementById("pChart");
     window.pChart = new Chart(pct, pconfig);
-    //add
     var wct = document.getElementById("wChart");
     window.wChart = new Chart(wct, wconfig);
 }
@@ -216,3 +196,7 @@ window.onload = function(){
     // document.write("hoge");
     drawChart();
 };
+
+document.write(",debug:date,"+date[0]);
+document.write(",debug:obj,"+obj[0][1]);
+document.write(",debug:obj.length,"+Date(obj[0][1]));

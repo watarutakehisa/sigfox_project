@@ -24,9 +24,10 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
             <!-- choose either "data.js + local.js" or "scraper.js below" -->
             <script type="text/javascript">
-                let obj = {{ sigfoxdata|tojson }};
+                var obj = {{ sigfoxdata|tojson }};
             </script>
             <script type="text/javascript" src="static/local_sigfoxdata.js"></script>
+
 
             <!--<script type="text/javascript" src="static/data.js"></script>-->
             <!-- <script type="text/javascript" src="scraper.js"></script> -->
