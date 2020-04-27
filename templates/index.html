@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="300">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+        <title>Graph</title>
+</head>
+    <body>
+        <button id="addData">+1day</button>
+        <button id="reduceData">-1day</button>
+        <button id="recent">Recent 7days</button>
+        <h1>気温</h1>
+        <canvas id="tChart"></canvas>
+        <h1>湿度</h1>
+        <canvas id="hChart"></canvas>
+        <h1>気圧</h1>
+        <canvas id="pChart"></canvas>
+        <h1>水位</h1>
+        <canvas id="wChart"></canvas>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+            <!-- choose either "data.js + local.js" or "scraper.js below" -->
+            <script type="text/javascript">
+                let obj = {{ sigfoxdata|tojson }};
+            </script>
+            <script type="text/javascript" src="static/local2.js"></script>
+
+            <!--<script type="text/javascript" src="static/data.js"></script>-->
+            <!-- <script type="text/javascript" src="scraper.js"></script> -->
+    </body>
+</html>
