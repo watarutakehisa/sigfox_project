@@ -12,7 +12,7 @@ function drawChart(){
 
 async function setData(obj){
     for(let i=0; i<obj.length; i++){
-        date[i] = Date(obj[i][1]);  // if use API v2
+        date[i] = new Date(obj[i][1]);  // if use API v2
         // TEMPERATURE
         temperature[i] = {t: date[i], y: obj[i][2]};
         // HUMIDITY
@@ -197,6 +197,4 @@ window.onload = function(){
     drawChart();
 };
 
-document.write(",debug:date,"+date[0]);
-document.write(",debug:obj,"+obj[0][1]);
-document.write(",debug:obj.length,"+Date(obj[0][1]));
+console.log(date)
