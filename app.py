@@ -40,5 +40,11 @@ def sigfoxdata(id):
     html = render_template('index.html',sigfoxdata=sigfoxdata)
     return html
 
+@app.route('/')
+def home():
+    props={'ホーム':'Sigfoxを用いた定点の気象情報観測システムです。'}
+    html = render_template('home.html',props=props)
+    return html
+
 if __name__ == '__main__':
     app.run(debug=True)
