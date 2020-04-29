@@ -152,7 +152,7 @@ var wconfig = {
     data: {
         labels: date,
         datasets: [{
-            label: '水位 [m]',
+            label: '水位 [cm]',
             backgroundColor: 'rgb(255, 132, 99)',
             borderColor: 'rgb(255, 132, 99)',
             data: waterlevel,
@@ -168,7 +168,6 @@ function updateCharts(){
     tChart.update();
     hChart.update();
     pChart.update();
-    //add
     wChart.update();
 }
 

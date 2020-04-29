@@ -4,6 +4,7 @@ from flask import url_for
 from flask import render_template
 import json
 
+#sigfoxdataは配列、[deviceId,time,tempreture,humid,pressure,distance]
 from datastore.MySQL import MySQL
 dns={
     'user':'sigfox',
@@ -12,6 +13,25 @@ dns={
     'database':'sigfoxdata'
 }
 db=MySQL(**dns)
+
+# class warn:
+#     def __init__(self):
+#         self.warn = 0
+#         self.config_max = [0,0,0,0]
+#     def calculate(self,predict,measure):
+#         for config in self.config_max:
+#             if self.config<measure:
+#                 self.warn=2
+#             elif self.config<predict:
+#                 self.warn=1
+#             else:
+#                 self.warn=0
+#     def __str__(self):
+#         return self.config
+#     def insert_config(self,**list):
+#         self.config=list
+# def calculate_warning(**warning_config,**sigfoxdata):
+#     for config in warning_config:
 
 app = Flask(__name__)
 @app.route('/test')
@@ -27,24 +47,22 @@ def receive_data():
     db.insert_sigfoxdata(**data)
     return data['distance']
 
-@app.route('/devicelist')
+@app.route('/')
 def devicelist():
-    props = {'title': 'Device List', 'msg': 'aaa'}
+    props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測システムです。'}
     list = db.export_devicelist_all()
     html = render_template('devicelist.html',props=props,list=list)
     return html
 
 @app.route('/<string:id>')
 def sigfoxdata(id):
+    props = {'title': id+'の観測結果', 'msg': id+'の観測結果です。'}
     sigfoxdata = db.export_sigfoxdata_where_id(id)
-    html = render_template('index.html',sigfoxdata=sigfoxdata)
+    html = render_template('devicepage.html',props=props,sigfoxdata=sigfoxdata)
     return html
 
-@app.route('/')
-def home():
-    props={'ホーム':'Sigfoxを用いた定点の気象情報観測システムです。'}
-    html = render_template('home.html',props=props)
-    return html
+#@app.route('/config',methods=['POST','GET'])
+#def config():
 
 if __name__ == '__main__':
     app.run(debug=True)
