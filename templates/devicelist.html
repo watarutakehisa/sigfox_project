@@ -3,23 +3,55 @@
     <head>
         <meta charset="utf-8">
         <title>{{props.title}}</title>
+        <!-- leafletをロード -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+        <link rel="stylesheet" type="text/css" href="static/all.css">
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+        <!-- leaflet用にスタイルを定義 (地図要素を画面一杯に引き延ばす) -->
+        <style type="text/css">
+        body {
+            margin: 40px;
+        }
+        #map {
+            height: 60vh;
+        }
+        </style>
     </head>
     <body>
-        <a href="/devicelist">設定</a>
+        <h1>{{props.msg}}</h1>
+        <div id="map"></div>
         <div id="contents">
-            <p>{{props.msg}}</p>
             <table>
                 <tr>
                     <th>DEVICE ID</th>
                     <th>ADDRESS</th>
+                    <th>経度</th>
+                    <th>緯度</th>
+                    <th>温度の最大値</th>
+                    <th>湿度の最大値</th>
+                    <th>気圧の最大値</th>
+                    <th>距離の最大値</th>
+                    <th>設定</th>
+
                 </tr>
                 {% for device in list %}
                 <tr>
                     <td><a href="./{{device[0]}}">{{device[0]}}</a></td>
                     <td>{{device[1]}}</td>
+                    <td>{{device[2]}}</td>
+                    <td>{{device[3]}}</td>
+                    <td>{{device[4]}}</td>
+                    <td>{{device[5]}}</td>
+                    <td>{{device[6]}}</td>
+                    <td>{{device[7]}}</td>
+                    <td><a href="./form/{{device[0]}}">設定</td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
+        <script type="text/javascript">
+            var device_obj = {{ list|tojson }};
+        </script>
+        <script src="static/devicemap.js"></script>
     </body>
 </html>

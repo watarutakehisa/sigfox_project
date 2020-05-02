@@ -49,9 +49,10 @@ def receive_data():
 
 @app.route('/')
 def devicelist():
-    props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測システムです。'}
+    props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測'}
     list = db.export_devicelist_all()
     html = render_template('devicelist.html',props=props,list=list)
+    #html = render_template('devicemap.html')
     return html
 
 @app.route('/<string:id>')
@@ -60,6 +61,17 @@ def sigfoxdata(id):
     sigfoxdata = db.export_sigfoxdata_where_id(id)
     html = render_template('devicepage.html',props=props,sigfoxdata=sigfoxdata)
     return html
+
+@app.route('/form/<string:id>')
+def form(id):
+    props = {'title': id+'の設定', 'msg': id+'の設定'}
+    return render_template('form.html',props=props,id=id)
+
+@app.route('/request_form',methods = ['POST','GET'])
+def request_form():
+    if request.method=='POST':
+        result = request_form
+        return render_template("confirm.html",result=result)
 
 #@app.route('/config',methods=['POST','GET'])
 #def config():

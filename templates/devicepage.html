@@ -7,19 +7,20 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
         <title>{{props.title}}</title>
+        <link rel="stylesheet" type="text/css" href="static/all.css">
 </head>
     <body>
-        <p>{{props.msg}}</p>
+        <h1>{{props.msg}}</h1>
         <button id="addData">+1day</button>
         <button id="reduceData">-1day</button>
         <button id="recent">Recent 7days</button>
-        <h1>気温</h1>
+        <h2>気温</h2>
         <canvas id="tChart"></canvas>
-        <h1>湿度</h1>
+        <h2>湿度</h2>
         <canvas id="hChart"></canvas>
-        <h1>気圧</h1>
+        <h2>気圧</h2>
         <canvas id="pChart"></canvas>
-        <h1>水位</h1>
+        <h2>水位</h2>
         <canvas id="wChart"></canvas>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>

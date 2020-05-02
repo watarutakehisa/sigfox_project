@@ -53,3 +53,11 @@ class MySQL:
         cursor.close()
         self._close()
         return data
+    # def update_devicelist_all(self,datalist):
+    #     self._open()
+    #     cursor=self.dbh.cursor()
+    #     cursor.execute('SELECT * FROM devicelist')
+    #     data=cursor.fetchall()
+    #     cursor.close()
+    #     self._close()
+    #     return data

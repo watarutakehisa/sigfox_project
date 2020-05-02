@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{props.title}}</title>
+    <link rel="stylesheet" type="text/css" href="/static/all.css">
+    </style>
+</head>
+   <body>
+     <h1>{{props.msg}}</h1>
+      <form action = "/request_form" method = "POST">
+        <p>詳細位置 <input type = "text" name = "address" /></p>
+         <p>経度 <input type = "text" name = "longitude" /></p>
+         <p>緯度 <input type ="text" name = "latitude" /></p>
+         <p>気温の最大値[℃] <input type = "text" name = "max_tempreture" /></p>
+         <p>湿度の最大値[%] <input type ="text" name = "max_humid" /></p>
+         <p>気圧の最大値[hPa] <input type = "text" name = "max_pressure" /></p>
+         <p>水位の最大値[cm] <input type ="text" name = "max_distance" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+      </form>
+   </body>
+</html>
