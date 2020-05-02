@@ -40,12 +40,7 @@ def test():
     html = render_template('index.html',sigfoxdata=sigfoxdata)
     return html
 
-@app.route('/receive', methods=['POST'])
-def receive_data():
-    #post送信されたデータを受けとる
-    data = request.json
-    db.insert_sigfoxdata(**data)
-    return data['distance']
+
 
 @app.route('/')
 def devicelist():
@@ -65,14 +60,25 @@ def sigfoxdata(id):
 @app.route('/form/<string:id>')
 def form(id):
     props = {'title': id+'の設定', 'msg': id+'の設定'}
-    return render_template('form.html',props=props,id=id)
+    list = db.export_devicelist_where_id(id)
+    return render_template('form.html',props=props,list=list)
 
-@app.route('/request_form',methods = ['POST','GET'])
+@app.route('/request_form',methods = ['POST'])
 def request_form():
-    if request.method=='POST':
-        result = request_form
-        return render_template("confirm.html",result=result)
+        datalist = request.form
+        #app.logger.debug()
+        db.update_devicelist_all(**datalist)
+        props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測'}
 
+        list = db.export_devicelist_all()
+        html = render_template('devicelist.html',props=props,list=list)
+        return html
+        #return datalist['deviceId']
+@app.route('/receive', methods=['POST'])
+def receive_data():
+    #post送信されたデータを受けとる
+    data = request.json
+    db.insert_sigfoxdata(**data)
 #@app.route('/config',methods=['POST','GET'])
 #def config():
 
