@@ -19,11 +19,11 @@ sudo pip3 install flask
 sudo pip3 install mysql-connector
 ```
 
-## mysqlをインストール
+## 3.mysqlをインストール
 
 これもOSによって違いが激しいため、省略。[これ](https://qiita.com/nooboolean/items/7efc5c35b2e95637d8c1)を参照。また、ユーザーを作る際に詰まったので[こちら](https://qiita.com/keisukeYamagishi/items/d897e5c52fe9fd8d9273)も参照
 
-## Mysqlへのデータ格納の準備
+## 4.mysqlへのデータ格納の準備
 
 mysqlサーバーを起動し、ルート権限でログインする。僕のMacだとこんな感じ。
 ```
