@@ -4,7 +4,6 @@ from flask import url_for
 from flask import render_template
 import json
 
-#sigfoxdataは配列、[deviceId,time,tempreture,humid,pressure,distance]
 from datastore.MySQL import MySQL
 dns={
     'user':'sigfox',
@@ -13,41 +12,13 @@ dns={
     'database':'sigfoxdata'
 }
 db=MySQL(**dns)
-
-# class warn:
-#     def __init__(self):
-#         self.warn = 0
-#         self.config_max = [0,0,0,0]
-#     def calculate(self,predict,measure):
-#         for config in self.config_max:
-#             if self.config<measure:
-#                 self.warn=2
-#             elif self.config<predict:
-#                 self.warn=1
-#             else:
-#                 self.warn=0
-#     def __str__(self):
-#         return self.config
-#     def insert_config(self,**list):
-#         self.config=list
-# def calculate_warning(**warning_config,**sigfoxdata):
-#     for config in warning_config:
-
 app = Flask(__name__)
-@app.route('/test')
-def test():
-    sigfoxdata = db.export_sigfoxdata_all()
-    html = render_template('index.html',sigfoxdata=sigfoxdata)
-    return html
-
-
 
 @app.route('/')
 def devicelist():
     props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測'}
     list = db.export_devicelist_all()
     html = render_template('devicelist.html',props=props,list=list)
-    #html = render_template('devicemap.html')
     return html
 
 @app.route('/<string:id>')
@@ -66,21 +37,18 @@ def form(id):
 @app.route('/request_form',methods = ['POST'])
 def request_form():
         datalist = request.form
-        #app.logger.debug()
         db.update_devicelist_all(**datalist)
         props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測'}
 
         list = db.export_devicelist_all()
         html = render_template('devicelist.html',props=props,list=list)
         return html
-        #return datalist['deviceId']
+
 @app.route('/receive', methods=['POST'])
 def receive_data():
     #post送信されたデータを受けとる
     data = request.json
     db.insert_sigfoxdata(**data)
-#@app.route('/config',methods=['POST','GET'])
-#def config():
 
 if __name__ == '__main__':
     app.run(debug=True)
