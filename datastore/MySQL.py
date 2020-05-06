@@ -13,13 +13,21 @@ class MySQL:
 
 
 
-    def insert_devicelist(self,deviceId,address):
+#     def insert_devicelist(self,deviceId,address):
+#         self._open()
+#         cursor=self.dbh.cursor()
+#         cursor.execute('INSERT INTO devicelist VALUES (%s,%s)',(deviceId,address))
+#         cursor.close()
+#         self.dbh.commit()
+#         self._close()
+    def insert_devicelist(self,deviceId,address,latitude,longitude,a,b,c,d):
         self._open()
         cursor=self.dbh.cursor()
-        cursor.execute('INSERT INTO devicelist VALUES (%s,%s)',(deviceId,address))
+        cursor.execute('INSERT INTO devicelist VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(deviceId,address,latitude,longitude,a,b,c,d))
         cursor.close()
         self.dbh.commit()
         self._close()
+
 
     def export_sigfoxdata_all(self):
         self._open()
