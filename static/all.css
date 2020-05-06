@@ -25,3 +25,43 @@ table td{
   text-align: center;
   padding: 10px 0;
 }
+
+/*box design*/
+.box_warning{
+  border: 2px solid #FF0000;
+}
+h3.header_warning{
+  background: #FF0000;
+  color: #FFF;
+  margin: 0;
+  display:inline-block;
+  padding: .3em .5em;
+  border-radius: 10px 10px 0 0;
+}
+.box_warning .inner_warning{
+  padding: .5em;
+}
+
+.box_note{
+  border: 2px solid #FFA500;
+}
+h3.header_note{
+  background: #FFA500;
+  color: #FFF;
+  margin: 0;
+  display:inline-block;
+  padding: .3em .5em;
+  border-radius: 10px 10px 0 0;
+}
+.box_note .inner_note{
+  padding: .5em;
+}
+
+/*横並びできる？*/
+.flex{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}

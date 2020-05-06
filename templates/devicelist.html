@@ -10,7 +10,7 @@
         <!-- leaflet用にスタイルを定義 (地図要素を画面一杯に引き延ばす) -->
         <style type="text/css">
         body {
-            margin: 40px;
+            margin: 50px;
         }
         #map {
             height: 60vh;
@@ -19,6 +19,21 @@
     </head>
     <body>
         <h1>{{props.msg}}</h1>
+
+        <h3 class="header_warning">観測情報</h3>
+        <div class="box_warning">
+          <div class="inner_warning">
+            情報が出ていません。
+          </div>
+        </div>
+        <br>
+        <h3 class="header_note">予測情報</h3>
+        <div class="box_note">
+          <div class="inner_note">
+            情報が出ていません。
+          </div>
+        </div>
+        <br>
         <div id="map"></div>
         <div id="contents">
             <table>
