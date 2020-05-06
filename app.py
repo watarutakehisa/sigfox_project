@@ -51,4 +51,4 @@ def receive_data():
     db.insert_sigfoxdata(**data)
 
 if __name__ == '__main__':
-    app.run(debug=True')
+    app.run(debug=True)
