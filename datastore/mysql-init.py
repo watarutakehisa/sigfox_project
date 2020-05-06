@@ -18,8 +18,8 @@ cursor.execute('CREATE TABLE IF NOT EXISTS devicelist(deviceId CHAR(6) NOT NULL,
 cursor.execute('CREATE TABLE IF NOT EXISTS predict(deviceId CHAR(6),time INT,temperature FLOAT,humid FLOAT,pressure INT,distance INT,warninglevel INT)')
 
 #値を代入
-#db.insert_devicelist('759E68','point1')
-#db.insert_devicelist('742879','point2')
+db.insert_devicelist('759E68','point1')
+db.insert_devicelist('742879','point2')
 
 cursor.close()
 db.dbh.commit()
