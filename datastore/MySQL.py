@@ -68,7 +68,7 @@ class MySQL:
     def insert_sigfoxdata(self,**sigfoxdata):
         self._open()
         cursor=self.dbh.cursor()
-        cursor.execute('INSERT INTO measurement VALUES (%s,%s,%s,%s,%s,%s)',(sigfoxdata['deviceId'],sigfoxdata['time'],sigfoxdata['temperature'],sigfoxdata['humid'],sigfoxdata['pressure'],sigfoxdata['distance']))
+        cursor.execute('INSERT INTO measurement VALUES (%s,%s,%s,%s,%s,%s,%s)',(sigfoxdata['deviceId'],sigfoxdata['time'],sigfoxdata['temperature'],sigfoxdata['humid'],sigfoxdata['pressure'],sigfoxdata['distance'],0))
         cursor.close()
         self.dbh.commit()
         self._close()
