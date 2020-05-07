@@ -68,17 +68,17 @@ class MySQL:
     def insert_sigfoxdata(self,**sigfoxdata):
         self._open()
         cursor=self.dbh.cursor()
-        cursor.execute('INSERT INTO measurement VALUES (%s,%s,%s,%s,%s,%s,%s)',(sigfoxdata['deviceId'],sigfoxdata['time'],sigfoxdata['temperature'],sigfoxdata['humid'],sigfoxdata['pressure'],sigfoxdata['distance'],0))
+        cursor.execute('INSERT INTO measurement VALUES (%s,%s,%s,%s,%s,%s,%s)',(sigfoxdata['deviceId'],sigfoxdata['time'],sigfoxdata['temperature'],sigfoxdata['humid'],sigfoxdata['pressure'],sigfoxdata['distance'],'0'))
         cursor.close()
         self.dbh.commit()
         self._close()
-    def insert_predictdata(self,**predictdata):
-        self._open()
-        cursor=self.dbh.cursor()
-        cursor.execute('INSERT INTO predict VALUES (%s,%s,%s,%s,%s,%s)',(predict['deviceId'],predict['time'],predict['temperature'],predict['humid'],predict['pressure'],predict['distance']))
-        cursor.close()
-        self.dbh.commit()
-        self._close()
+    # def insert_predictdata(self,**predictdata):
+    #     self._open()
+    #     cursor=self.dbh.cursor()
+    #     cursor.execute('INSERT INTO predict VALUES (%s,%s,%s,%s,%s,%s)',(predict['deviceId'],predict['time'],predict['temperature'],predict['humid'],predict['pressure'],predict['distance']))
+    #     cursor.close()
+    #     self.dbh.commit()
+    #     self._close()
     def update_devicelist_all(self,**datalist):
         self._open()
         cursor=self.dbh.cursor()

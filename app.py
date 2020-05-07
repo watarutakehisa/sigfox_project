@@ -50,5 +50,7 @@ def receive_data():
     data = request.json
     db.insert_sigfoxdata(**data)
 
+    return data['distance']
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
