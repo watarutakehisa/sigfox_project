@@ -5,6 +5,7 @@ from flask import render_template
 import json
 
 from datastore.MySQL import MySQL
+
 dns={
     'user':'sigfox',
     'host':'localhost',
@@ -14,10 +15,24 @@ dns={
 db=MySQL(**dns)
 app = Flask(__name__)
 
+def predict_sample(id):
+    #デフォルトがタプルなのでリストに変換して計算
+    sigfoxdata = db.export_sigfoxdata_pickup_latest_where_id(id,1)
+    data = sigfoxdata[0]
+    tmp=list(data)
+    tmp[1] = tmp[1] + 60 * 30
+    predictdata = tuple(tmp)
+    return predictdata
+
 @app.route('/')
 def devicelist():
     props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測'}
     list = db.export_devicelist_all()
+    # latestdata = list(range(0))
+    # for i in list:
+    #     tmp = db.export_sigfoxdata_pickup_latest_where_id(1,i[0])
+    #     latestdata.append(tmp)
+    # html = render_template('devicelist.html',props=props,list=list,latestdata=latestdata)
     html = render_template('devicelist.html',props=props,list=list)
     return html
 
@@ -36,20 +51,22 @@ def form(id):
 
 @app.route('/request_form',methods = ['POST'])
 def request_form():
-        datalist = request.form
-        db.update_devicelist_all(**datalist)
-        props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測'}
+    datalist = request.form
+    db.update_devicelist_all(**datalist)
+    props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測'}
 
-        list = db.export_devicelist_all()
-        html = render_template('devicelist.html',props=props,list=list)
-        return html
+    list = db.export_devicelist_all()
+    html = render_template('devicelist.html',props=props,list=list)
+    return html
 
 @app.route('/receive', methods=['POST'])
 def receive_data():
     #post送信されたデータを受けとる
     data = request.json
     db.insert_sigfoxdata(**data)
-
+    #このタイミングで予測
+    predictdata=predict_sample(data['deviceId'])
+    db.insert_predictdata(*predictdata)
     return data['distance']
 
 if __name__ == '__main__':

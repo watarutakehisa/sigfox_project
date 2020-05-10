@@ -46,8 +46,15 @@ class MySQL:
         cursor.close()
         self._close()
         return data
-    #def export_latest_data(self):
 
+    #時刻が新しいデータをpickup個取り出す。
+    def export_sigfoxdata_pickup_latest_where_id(self,id,pickup):
+        self._open()
+        cursor=self.dbh.cursor()
+        cursor.execute('select * from (select * from measurement where deviceId = %s order by time desc limit %s) as A order by time;',(id,pickup,))
+        data=cursor.fetchall()
+        cursor.close()
+        return data
 
     def export_devicelist_all(self):
         self._open()
@@ -72,13 +79,13 @@ class MySQL:
         cursor.close()
         self.dbh.commit()
         self._close()
-    # def insert_predictdata(self,**predictdata):
-    #     self._open()
-    #     cursor=self.dbh.cursor()
-    #     cursor.execute('INSERT INTO predict VALUES (%s,%s,%s,%s,%s,%s)',(predict['deviceId'],predict['time'],predict['temperature'],predict['humid'],predict['pressure'],predict['distance']))
-    #     cursor.close()
-    #     self.dbh.commit()
-    #     self._close()
+    def insert_predictdata(self,*predictdata):
+        self._open()
+        cursor=self.dbh.cursor()
+        cursor.execute('INSERT INTO predict VALUES (%s,%s,%s,%s,%s,%s,%s)',(predictdata[0],predictdata[1],predictdata[2],predictdata[3],predictdata[4],predictdata[5],predictdata[6]))
+        cursor.close()
+        self.dbh.commit()
+        self._close()
     def update_devicelist_all(self,**datalist):
         self._open()
         cursor=self.dbh.cursor()
