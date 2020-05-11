@@ -27,6 +27,7 @@
             <!-- choose either "data.js + local.js" or "scraper.js below" -->
             <script type="text/javascript">
                 var obj = {{ sigfoxdata|tojson }};
+                var predictdata = {{ predictdata|tojson }};
             </script>
             <script type="text/javascript" src="static/local_sigfoxdata.js"></script>
 

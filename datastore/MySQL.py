@@ -79,6 +79,7 @@ class MySQL:
         cursor.close()
         self.dbh.commit()
         self._close()
+
     def insert_predictdata(self,*predictdata):
         self._open()
         cursor=self.dbh.cursor()
@@ -86,6 +87,16 @@ class MySQL:
         cursor.close()
         self.dbh.commit()
         self._close()
+
+    def export_predictdata_where_id(self,deviceId):
+        self._open()
+        cursor=self.dbh.cursor()
+        cursor.execute('SELECT * FROM predict WHERE deviceId = %s',(deviceId,))
+        data=cursor.fetchall()
+        cursor.close()
+        self._close()
+        return data
+
     def update_devicelist_all(self,**datalist):
         self._open()
         cursor=self.dbh.cursor()

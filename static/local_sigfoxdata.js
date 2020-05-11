@@ -4,13 +4,18 @@ var date = [],
     pressure = [],
     waterlevel = [];
 
+    temperature_predict = [],
+    humidity_predict = [],
+    pressure_predict = [],
+    waterlevel_predict = [];
+
 function drawChart(){
-    setData(obj).then(function(){
+    setData(obj,predictdata).then(function(){
         plotCharts();
     });
 };
 
-async function setData(obj){
+async function setData(obj,predictdata){
     for(let i=0; i<obj.length; i++){
         date[i] = new Date(obj[i][1] * 1000);  // if use API v2
         // TEMPERATURE
@@ -21,6 +26,18 @@ async function setData(obj){
         pressure[i] = {t: date[i], y: obj[i][4]};
         // WATERLEVEL
         waterlevel[i] = {t: date[i],y: obj[i][5]};
+    }
+
+    for(let i=0; i<predictdata.length; i++){
+        date[i] = new Date(predictdata[i][1] * 1000);  // if use API v2
+        // TEMPERATURE
+        temperature_predict[i] = {t: date[i], y: predictdata[i][2]};
+        // HUMIDITY
+        humidity_predict[i] = {t: date[i], y: predictdata[i][3]};
+        // PRESSURE
+        pressure_predict[i] = {t: date[i], y: predictdata[i][4]};
+        // WATERLEVEL
+        waterlevel_predict[i] = {t: date[i],y: predictdata[i][5]};
     }
     return 0;
 }
@@ -106,6 +123,14 @@ var tconfig = {
             data: temperature,
             fill: false,
             lineTension: 0,
+        },{
+            label: '予測気温 [*C]',
+            backgroundColor: 'RGB(255, 156, 185)',
+            borderColor: 'RGB(255, 156, 185)',
+            data: temperature_predict,
+            fill: false,
+            lineTension: 0,
+            borderDash: [5, 5],
         }]
     },
     options: options
@@ -123,6 +148,14 @@ var hconfig = {
             data: humidity,
             fill: false,
             lineTension: 0,
+        },{
+            label: '予測湿度 [%]',
+            backgroundColor: 'RGB(99, 216, 255)',
+            borderColor: 'RGB(99, 216, 255)',
+            data: temperature_predict,
+            fill: false,
+            lineTension: 0,
+            borderDash: [5, 5],
         }]
     },
     options: options
@@ -140,6 +173,14 @@ var pconfig = {
             data: pressure,
             fill: false,
             lineTension: 0,
+        },{
+            label: '予測気圧 [%]',
+            backgroundColor: 'RGB(156, 99, 255)',
+            borderColor: 'RGB(156, 99, 255)',
+            data: temperature_predict,
+            fill: false,
+            lineTension: 0,
+            borderDash: [5, 5],
         }]
     },
     options: options
@@ -158,6 +199,14 @@ var wconfig = {
             data: waterlevel,
             fill: false,
             lineTension: 0,
+        },{
+            label: '予測湿度 [%]',
+            backgroundColor: 'RGB(255, 174, 99)',
+            borderColor: 'RGB(255, 174, 99)',
+            data: temperature_predict,
+            fill: false,
+            lineTension: 0,
+            borderDash: [5, 5],
         }]
     },
     options: options

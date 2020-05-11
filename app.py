@@ -23,6 +23,23 @@ def predict_sample(id):
     tmp[1] = tmp[1] + 60 * 30
     predictdata = tuple(tmp)
     return predictdata
+# def predict_sample2(id,count):
+#     #デフォルトがタプルなのでリストに変換して計算
+#     sigfoxdata = db.export_sigfoxdata_pickup_latest_where_id(id,1)
+#     data = list(sigfoxdata[0])
+
+#     for i in range(count):
+#         tmp=data
+#         tmp[1] = data[1] + 60 * 30
+#         tuple_tmp=tuple(tmp)
+#         predictdata.push(tuple_tmp)
+
+
+
+
+#     tmp[1] = tmp[1] + 60 * 30
+#     predictdata = tuple(tmp)
+#     return predictdata
 
 @app.route('/')
 def devicelist():
@@ -39,8 +56,11 @@ def devicelist():
 @app.route('/<string:id>')
 def sigfoxdata(id):
     props = {'title': id+'の観測結果', 'msg': id+'の観測結果です。'}
+    #measurementを取得
     sigfoxdata = db.export_sigfoxdata_where_id(id)
-    html = render_template('devicepage.html',props=props,sigfoxdata=sigfoxdata)
+    #predictを取得
+    predictdata = db.export_predictdata_where_id(id)
+    html = render_template('devicepage.html',props=props,sigfoxdata=sigfoxdata, predictdata=predictdata)
     return html
 
 @app.route('/form/<string:id>')
