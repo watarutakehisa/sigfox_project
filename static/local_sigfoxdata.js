@@ -51,7 +51,7 @@ async function setData(obj,predictdata){
         // PRESSURE
         pressure_predict[i] = {t: date_predict[i], y: predictdata[i][4]};
         // WATERLEVEL
-        waterlevel_predict[i] = {t: datedate_predict[i],y: predictdata[i][5]};
+        waterlevel_predict[i] = {t: date_predict[i],y: predictdata[i][5]};
     }
     return 0;
 }
