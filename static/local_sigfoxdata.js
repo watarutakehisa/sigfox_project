@@ -2,8 +2,8 @@ var date = [],
     temperature = [],
     humidity = [],
     pressure = [],
-    waterlevel = [];
-
+    waterlevel = [],
+    date_predict=[],
     temperature_predict = [],
     humidity_predict = [],
     pressure_predict = [],
@@ -14,7 +14,10 @@ function drawChart(){
         plotCharts();
     });
 };
-
+/*
+Chart.jsでは横軸を複数のリストにすることができない様子。{([時刻,実測値],...),([時刻,予測値],...)}みたいな渡し方だとどちらかの時刻に合わせる必要がありそう。
+とりあえず、
+*/
 async function setData(obj,predictdata){
     for(let i=0; i<obj.length; i++){
         date[i] = new Date(obj[i][1] * 1000);  // if use API v2
@@ -27,17 +30,28 @@ async function setData(obj,predictdata){
         // WATERLEVEL
         waterlevel[i] = {t: date[i],y: obj[i][5]};
     }
-
+    //let tmp=0;
+    // for(let i=obj.length;i>obj.length-predictdata.length;i--){
+    //     date_predict[tmp] = new Date(predictdata[tmp][1] * 1000);  // if use API v2
+    //     // TEMPERATURE
+    //     temperature_predict[tmp] = {t: date[tmp], y: predictdata[tmp][2]};
+    //     // HUMIDITY
+    //     humidity_predict[tmp] = {t: date[tmp], y: predictdata[tmp][3]};
+    //     // PRESSURE
+    //     pressure_predict[tmp] = {t: date[tmp], y: predictdata[tmp][4]};
+    //     // WATERLEVEL
+    //     waterlevel_predict[tmp] = {t: date[tmp],y: predictdata[tmp][5]};
+    // }
     for(let i=0; i<predictdata.length; i++){
-        date[i] = new Date(predictdata[i][1] * 1000);  // if use API v2
+        date_predict[i] = new Date(predictdata[i][1] * 1000);  // if use API v2
         // TEMPERATURE
-        temperature_predict[i] = {t: date[i], y: predictdata[i][2]};
+        temperature_predict[i] = {t: date_predict[i], y: predictdata[i][2]};
         // HUMIDITY
-        humidity_predict[i] = {t: date[i], y: predictdata[i][3]};
+        humidity_predict[i] = {t: date_predict[i], y: predictdata[i][3]};
         // PRESSURE
-        pressure_predict[i] = {t: date[i], y: predictdata[i][4]};
+        pressure_predict[i] = {t: date_predict[i], y: predictdata[i][4]};
         // WATERLEVEL
-        waterlevel_predict[i] = {t: date[i],y: predictdata[i][5]};
+        waterlevel_predict[i] = {t: datedate_predict[i],y: predictdata[i][5]};
     }
     return 0;
 }
