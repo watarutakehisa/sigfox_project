@@ -188,7 +188,7 @@ var pconfig = {
             fill: false,
             lineTension: 0,
         },{
-            label: '予測気圧 [%]',
+            label: '予測気圧 [hPa]',
             backgroundColor: 'RGB(156, 99, 255)',
             borderColor: 'RGB(156, 99, 255)',
             data: pressure_predict,
@@ -214,7 +214,7 @@ var wconfig = {
             fill: false,
             lineTension: 0,
         },{
-            label: '予測湿度 [%]',
+            label: '予測湿度 [cm]',
             backgroundColor: 'RGB(255, 174, 99)',
             borderColor: 'RGB(255, 174, 99)',
             data: waterlevel_predict,
