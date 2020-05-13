@@ -23,33 +23,11 @@ def predict_sample(id):
     tmp[1] = tmp[1] + 60 * 30
     predictdata = tuple(tmp)
     return predictdata
-# def predict_sample2(id,count):
-#     #デフォルトがタプルなのでリストに変換して計算
-#     sigfoxdata = db.export_sigfoxdata_pickup_latest_where_id(id,1)
-#     data = list(sigfoxdata[0])
-
-#     for i in range(count):
-#         tmp=data
-#         tmp[1] = data[1] + 60 * 30
-#         tuple_tmp=tuple(tmp)
-#         predictdata.push(tuple_tmp)
-
-
-
-
-#     tmp[1] = tmp[1] + 60 * 30
-#     predictdata = tuple(tmp)
-#     return predictdata
 
 @app.route('/')
 def devicelist():
     props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測'}
     list = db.export_devicelist_all()
-    # latestdata = list(range(0))
-    # for i in list:
-    #     tmp = db.export_sigfoxdata_pickup_latest_where_id(1,i[0])
-    #     latestdata.append(tmp)
-    # html = render_template('devicelist.html',props=props,list=list,latestdata=latestdata)
     html = render_template('devicelist.html',props=props,list=list)
     return html
 
