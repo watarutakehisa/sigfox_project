@@ -6,8 +6,8 @@ h1:after {
   content: "";
   display: block;
   height: 4px;
-  background: -webkit-linear-gradient(to right, #009944, transparent);
-  background: linear-gradient(to right, #009944, transparent);
+  background: -webkit-linear-gradient(to right, #a9a9a9, transparent);
+  background: linear-gradient(to right, #a9a9a9, transparent);
 }
 
 table{

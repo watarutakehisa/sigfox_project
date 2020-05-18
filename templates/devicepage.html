@@ -22,14 +22,15 @@
         <canvas id="pChart"></canvas>
         <h2>水位</h2>
         <canvas id="wChart"></canvas>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-            <!-- choose either "data.js + local.js" or "scraper.js below" -->
-            <script type="text/javascript">
-                var obj = {{ sigfoxdata|tojson }};
-                var predictdata = {{ predictdata|tojson }};
-            </script>
-            <script type="text/javascript" src="static/local_sigfoxdata.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+        <!-- choose either "data.js + local.js" or "scraper.js below" -->
+        <script type="text/javascript">
+            var obj = {{ sigfoxdata|tojson }};
+            var predictdata = {{ predictdata|tojson }};
+        </script>
+        <script type="text/javascript" src="static/local_sigfoxdata.js"></script>
 
 
             <!--<script type="text/javascript" src="static/data.js"></script>-->

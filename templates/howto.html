@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{props.title}}</title>
+    <link rel="stylesheet" type="text/css" href="/static/all.css">
+    </style>
+</head>
+   <body>
+     <h1>このサービスについて</h1>
+     <p>ここではこのサービスの概要と使い方について説明します。</p>
+     <h2>概要</h2>
+     このサービスは遠隔地の測定データを測定場所で分けてデータベースに保存し管理できます。
+     <br>
+     <img src="/static/images/DeviceAndSigfox.png" alt="DeviceAndSigfox" title="DeviceAndSigfox">
+     <br>
+     また、そのデータベースと機械学習を活用し、各地点ごとに予測データを作成できます。
+     <br>
+     <img src="/static/images/ServerAndAI.png" alt="DeviceAndSigfox" title="DeviceAndSigfox">
+     <br>
+     さらに、その予測データを遠隔地のデバイスに送信することができます。
+     <br>
+     <img src="/static/images/ServerAndAlert.png" alt="DeviceAndSigfox" title="DeviceAndSigfox">
+     <br>
+     この通信にはLPWA通信であるSigfoxを用いているため維持をするためにかかる費用は非常に安価です。<br>
+     本サービスは、用水路や河川に水位を測ることのできるデバイスを用意し、それにSigfoxを取り付けることを想定しています。こうすることで、用水路や河川の水位情報をしることだけではなく、デバイスを設置した各地点に予測データを送信することでアラートを出すことができ、危険を知らせることができます。以下ではその詳細について説明します。
+     <h3>各デバイスについて</h3>
+     各デバイスには測定装置にSigfoxデバイスが付加されています。
+     <h2>使い方</h2>
+     各Sigfoxデバイスやこのホームページの設定についてです。
+   </body>
+</html>

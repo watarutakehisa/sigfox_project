@@ -1,4 +1,3 @@
-/*graph*/
 var date = [],
     temperature = [],
     humidity = [],
@@ -9,7 +8,6 @@ var date = [],
     humidity_predict = [],
     pressure_predict = [],
     waterlevel_predict = [];
-/**/
 
 function drawChart(){
     setData(obj,predictdata).then(function(){

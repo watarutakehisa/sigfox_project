@@ -20,7 +20,7 @@
     <body>
         <h1>{{props.msg}}</h1>
 
-        <!-- <h2>観測したい情報を選んでください。</h2>
+        <h2>観測したい情報を選んでください。</h2>
         <select id="mode">
             <option value=1>温度情報</option>
             <option value=2>湿度情報</option>
@@ -29,7 +29,8 @@
         </select>
         <script type="text/javascript">
             var selectedMode = $("#mode").val();
-        </script> -->
+        </script>
+
         <h3 class="header_warning">観測情報</h3>
         <div class="box_warning">
           <div class="inner_warning">
@@ -55,6 +56,7 @@
                     <th>気圧の最大値</th>
                     <th>距離の最大値</th>
                     <th>設定</th>
+
                 </tr>
                 {% for device in list %}
                 <tr>

@@ -57,6 +57,12 @@ def request_form():
     html = render_template('devicelist.html',props=props,list=list)
     return html
 
+@app.route('/howto')
+def howto():
+    props = {'title': 'ホーム'}
+    html = render_template('howto.html',props=props)
+    return html
+
 @app.route('/receive', methods=['POST'])
 def receive_data():
     #post送信されたデータを受けとる
