@@ -20,6 +20,7 @@ class MySQL:
 #         cursor.close()
 #         self.dbh.commit()
 #         self._close()
+
     def insert_devicelist(self,deviceId,address,latitude,longitude,a,b,c,d):
         self._open()
         cursor=self.dbh.cursor()
@@ -73,9 +74,14 @@ class MySQL:
         self._close()
         return data
     def insert_sigfoxdata(self,**sigfoxdata):
+        #まずmax_を取得
+        device=self.export_devicelist_where_id(sigfoxdata['deviceId'])
         self._open()
         cursor=self.dbh.cursor()
-        cursor.execute('INSERT INTO measurement VALUES (%s,%s,%s,%s,%s,%s,%s)',(sigfoxdata['deviceId'],sigfoxdata['time'],sigfoxdata['temperature'],sigfoxdata['humid'],sigfoxdata['pressure'],sigfoxdata['distance'],'0'))
+        #とりあえず温度で作成
+        warning = float(sigfoxdata['temperature']) > device[0][4]
+        warning =sigfoxdata['temperature']
+        cursor.execute('INSERT INTO measurement VALUES (%s,%s,%s,%s,%s,%s,%s)',(sigfoxdata['deviceId'],sigfoxdata['time'],sigfoxdata['temperature'],sigfoxdata['humid'],sigfoxdata['pressure'],sigfoxdata['distance'],warning))
         cursor.close()
         self.dbh.commit()
         self._close()
