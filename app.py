@@ -28,7 +28,12 @@ def predict_sample(id):
 def devicelist():
     props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測'}
     list = db.export_devicelist_all()
-    html = render_template('devicelist.html',props=props,list=list)
+    data = []
+    for device in list:
+        warning = db.calc_warning_level(device[0])
+        tmp = device + (warning,)
+        data.append(tmp)
+    html = render_template('devicelist.html',props=props,list=data)
     return html
 
 @app.route('/<string:id>')
@@ -71,7 +76,8 @@ def receive_data():
     #このタイミングで予測
     predictdata=predict_sample(data['deviceId'])
     db.insert_predictdata(*predictdata)
-    return data['distance']
+    warning = db.calc_warning_level(data['deviceId'])
+    return warning
 
 if __name__ == '__main__':
     app.run(debug=True)

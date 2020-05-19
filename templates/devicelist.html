@@ -33,14 +33,22 @@
         <h3 class="header_warning">観測情報</h3>
         <div class="box_warning">
           <div class="inner_warning">
-            情報が出ていません。
+            {% for device in list %}
+            {% if device[8] == 2%}
+            <a href="./{{device[0]}}">{{device[1]}}</a>の予測情報が規定値を超えています。
+            {%endif%}
+            {% endfor %}
           </div>
         </div>
         <br>
         <h3 class="header_note">予測情報</h3>
         <div class="box_note">
           <div class="inner_note">
-            情報が出ていません。
+            {% for device in list %}
+            {% if device[8] == 1%}
+            <a href="./{{device[0]}}">{{device[1]}}</a>の予測情報が規定値を超えています。
+            {% endif %}
+            {% endfor %}
           </div>
         </div>
         <br>
