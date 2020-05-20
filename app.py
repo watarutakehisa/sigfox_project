@@ -79,5 +79,21 @@ def receive_data():
     warning = db.calc_warning_level(data['deviceId'])
     return warning
 
+@app.route('/addition')
+def addition():
+    props = {'title': 'デバイスの追加', 'msg': 'デバイスの追加'}
+    return render_template('addition.html',props=props)
+
+@app.route('/request_addition',methods = ['POST'])
+def request_addition():
+    db.insert_devicelist(request.form['deviceId'],request.form['address'],
+    request.form['latitude'],request.form['longitude'],request.form['max_tempreture'],
+    request.form['max_humid'],request.form['max_pressure'],request.form['max_distance'])
+    props = {'title': 'ホーム', 'msg': 'Sigfoxを用いた定点の気象情報観測'}
+
+    list = db.export_devicelist_all()
+    html = render_template('devicelist.html',props=props,list=list)
+    return html
+
 if __name__ == '__main__':
     app.run(debug=True)
